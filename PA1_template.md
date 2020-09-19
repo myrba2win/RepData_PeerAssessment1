@@ -112,7 +112,7 @@ timeMostSteps <-  gsub("([0-9]{1,2})([0-9]{2})", "\\1:\\2", averageStepsPerTimeB
 
 ## Imputing missing values
 
-##### 1. The total number of missing values in the dataset 
+##### 1. Calculate and report the total number of missing values in the dataset (i.e. the total number of rows with \color{red}{\verb|NA|}NAs) 
 
 
 ```r

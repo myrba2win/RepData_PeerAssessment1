@@ -440,8 +440,8 @@ timeMostSteps &lt;-  gsub(&quot;([0-9]{1,2})([0-9]{2})&quot;, &quot;\\1:\\2&quot
 </div>
 <div id="imputing-missing-values" class="section level2">
 <h2>Imputing missing values</h2>
-<div id="the-total-number-of-missing-values-in-the-dataset" class="section level5">
-<h5>1. The total number of missing values in the dataset</h5>
+<div id="calculate-and-report-the-total-number-of-missing-values-in-the-dataset-i.e.-the-total-number-of-rows-with-nas" class="section level5">
+<h5>1. Calculate and report the total number of missing values in the dataset (i.e. the total number of rows with NAs)</h5>
 <pre class="r"><code>numMissingValues &lt;- length(which(is.na(activityData$steps)))</code></pre>
 <pre><code>## [1] 2304</code></pre>
 </div>
