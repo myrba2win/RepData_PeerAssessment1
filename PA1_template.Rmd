@@ -19,17 +19,25 @@ if (!file.exists(dataInput_file)) {
   unzip (zipfile = dataInput_file)
   
 }
-activityData <- read.csv('activity.csv')
-
-summary(activityData)
-
-
+activityData <- read.csv("activity.csv")
 ```
 
-```{r, echo=FALSE, results='hide', warning=FALSE, message=FALSE}
+
+# Loading Libraries
+```{r, echo=TRUE, results='hide', warning=FALSE, message=FALSE}
+
 library(ggplot2)
 library(scales)
 library(Hmisc)
+library(dplyr)
+```
+
+```{r, echo=TRUE, results='markup', warning=TRUE, message=TRUE}
+
+Sys.setlocale("LC_TIME", "English")
+
+head(activityData)
+
 ```
 ##### 2. Transforming Interval Data
 
@@ -45,6 +53,10 @@ library(Hmisc)
 
 ```{r}
 stepsByDay <- tapply(activityData$steps, activityData$date, sum, na.rm=TRUE)
+```
+
+```{r, echo=FALSE, results='hide', warning=FALSE, message=FALSE}
+stepsByDay
 ```
 
 
@@ -96,7 +108,7 @@ timeMostSteps <-  gsub("([0-9]{1,2})([0-9]{2})", "\\1:\\2", averageStepsPerTimeB
 
 ## Imputing missing values
 
-##### 1. Calculate and report the total number of missing values in the dataset (i.e. the total number of rows with \color{red}{\verb|NA|}NAs) 
+##### 1. Calculate and report the total number of missing values in the dataset. 
 
 ```{r}
 numMissingValues <- length(which(is.na(activityData$steps)))
@@ -106,7 +118,10 @@ numMissingValues <- length(which(is.na(activityData$steps)))
 numMissingValues
 ```
 
-##### 2. Devise a strategy for filling in all of the missing values in the dataset.
+##### 2. Devise a strategy for filling in all of the missing values in the dataset. 
+```{r}
+# Let’s use a simple strategy : we’ll fill in all the missing values in the dataset with the mean per interval. Here’s the function that will return, for a particular interval, the mean value
+```
 ##### 3. Create a new dataset that is equal to the original dataset but with the missing data filled in.
 
 ```{r}

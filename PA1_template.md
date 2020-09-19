@@ -19,23 +19,41 @@ if (!file.exists(dataInput_file)) {
   unzip (zipfile = dataInput_file)
   
 }
-activityData <- read.csv('activity.csv')
-
-summary(activityData)
-```
-
-```
-##      steps            date              interval     
-##  Min.   :  0.00   Length:17568       Min.   :   0.0  
-##  1st Qu.:  0.00   Class :character   1st Qu.: 588.8  
-##  Median :  0.00   Mode  :character   Median :1177.5  
-##  Mean   : 37.38                      Mean   :1177.5  
-##  3rd Qu.: 12.00                      3rd Qu.:1766.2  
-##  Max.   :806.00                      Max.   :2355.0  
-##  NA's   :2304
+activityData <- read.csv("activity.csv")
 ```
 
 
+# Loading Libraries
+
+```r
+library(ggplot2)
+library(scales)
+library(Hmisc)
+library(dplyr)
+```
+
+
+```r
+Sys.setlocale("LC_TIME", "English")
+```
+
+```
+## [1] "English_United States.1252"
+```
+
+```r
+head(activityData)
+```
+
+```
+##   steps       date interval
+## 1    NA 2012-10-01        0
+## 2    NA 2012-10-01        5
+## 3    NA 2012-10-01       10
+## 4    NA 2012-10-01       15
+## 5    NA 2012-10-01       20
+## 6    NA 2012-10-01       25
+```
 ##### 2. Transforming Interval Data
 
 
@@ -55,6 +73,8 @@ stepsByDay <- tapply(activityData$steps, activityData$date, sum, na.rm=TRUE)
 ```
 
 
+
+
 ##### 2. Histogram of the total number of steps taken each day
 
 
@@ -62,7 +82,7 @@ stepsByDay <- tapply(activityData$steps, activityData$date, sum, na.rm=TRUE)
 qplot(stepsByDay, xlab='Total steps per day', ylab='Frequency using binwith 500', binwidth=500)
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-5-1.png)<!-- -->
+![](PA1_template_files/figure-html/unnamed-chunk-7-1.png)<!-- -->
 
 
 
@@ -96,7 +116,7 @@ ggplot(data=averageStepsPerTimeBlock, aes(x=interval, y=meanSteps)) +
     ylab("average number of steps taken") 
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-8-1.png)<!-- -->
+![](PA1_template_files/figure-html/unnamed-chunk-10-1.png)<!-- -->
 ##### 2. Which 5-minute interval, on average across all the days in the dataset, contains the maximum number of steps?
 
 
@@ -112,7 +132,7 @@ timeMostSteps <-  gsub("([0-9]{1,2})([0-9]{2})", "\\1:\\2", averageStepsPerTimeB
 
 ## Imputing missing values
 
-##### 1. Calculate and report the total number of missing values in the dataset (i.e. the total number of rows with \color{red}{\verb|NA|}NAs) 
+##### 1. Calculate and report the total number of missing values in the dataset. 
 
 
 ```r
@@ -124,7 +144,11 @@ numMissingValues <- length(which(is.na(activityData$steps)))
 ## [1] 2304
 ```
 
-##### 2. Devise a strategy for filling in all of the missing values in the dataset.
+##### 2. Devise a strategy for filling in all of the missing values in the dataset. 
+
+```r
+# Let’s use a simple strategy : we’ll fill in all the missing values in the dataset with the mean per interval. Here’s the function that will return, for a particular interval, the mean value
+```
 ##### 3. Create a new dataset that is equal to the original dataset but with the missing data filled in.
 
 
@@ -142,7 +166,7 @@ stepsByDayImputed <- tapply(activityDataImputed$steps, activityDataImputed$date,
 qplot(stepsByDayImputed, xlab='Total steps per day (Imputed)', ylab='Frequency using binwith 500', binwidth=500)
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-13-1.png)<!-- -->
+![](PA1_template_files/figure-html/unnamed-chunk-16-1.png)<!-- -->
 
 
  
@@ -185,4 +209,4 @@ ggplot(averagedActivityDataImputed, aes(interval, steps, color=dateType)) +
     ggtitle("Comparison of Average Number of Steps in Each Interval")
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-16-1.png)<!-- -->
+![](PA1_template_files/figure-html/unnamed-chunk-19-1.png)<!-- -->
