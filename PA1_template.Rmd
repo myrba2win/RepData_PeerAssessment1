@@ -25,16 +25,15 @@ summary(activityData)
 
 
 ```
-##### 2. Load the libraries 
 
 ```{r, echo=FALSE, results='hide', warning=FALSE, message=FALSE}
 library(ggplot2)
 library(scales)
 library(Hmisc)
 ```
-##### 3. Transforming Interval Data
+##### 2. Transforming Interval Data
 
-```{r, echo=FALSE, results='hide', warning=FALSE, message=FALSE}
+```{r, echo=TRUE, results='markup', warning=TRUE, message=TRUE}
 #activityData$interval <- strptime(gsub("([0-9]{1,2})([0-9]{2})", "\\1:\\2", activityData$interval), format='%H:%M')
 ```
 

@@ -34,12 +34,14 @@ summary(activityData)
 ##  Max.   :806.00                      Max.   :2355.0  
 ##  NA's   :2304
 ```
-##### 2. Load the libraries 
 
 
-##### 3. Transforming Interval Data
+##### 2. Transforming Interval Data
 
 
+```r
+#activityData$interval <- strptime(gsub("([0-9]{1,2})([0-9]{2})", "\\1:\\2", activityData$interval), format='%H:%M')
+```
 
 -----
 
