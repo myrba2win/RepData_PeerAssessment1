@@ -370,8 +370,6 @@ summary {
 <h2>Loading and preprocessing the data</h2>
 <div id="read-the-base-zip-file-activity.zip-that-contains-the-data" class="section level4">
 <h4>1. Read the base zip file “activity.zip” that contains the data</h4>
-<div id="this-first-line-will-likely-take-a-few-seconds.-be-patient" class="section level5">
-<h5>This first line will likely take a few seconds. Be patient!</h5>
 <pre class="r"><code>dataInput_file &lt;- &quot;activity.zip&quot;
 if (!file.exists(dataInput_file)) {
   data_URL &lt;- &quot;https://d396qusza40orc.cloudfront.net/repdata%2Fdata%2Factivity.zip&quot;
@@ -380,7 +378,6 @@ if (!file.exists(dataInput_file)) {
   
 }
 activityData &lt;- read.csv(&quot;activity.csv&quot;)</code></pre>
-</div>
 </div>
 </div>
 <div id="loading-libraries" class="section level1">

@@ -8,7 +8,6 @@ output:
 
 ## Loading and preprocessing the data
 ####   1. Read the base zip file "activity.zip" that contains the data
-#####     This first line will likely take a few seconds. Be patient!
 
 
 ```r
