@@ -27,7 +27,7 @@ summary(activityData)
 ```
 ##### 2. Load the libraries 
 
-```{r, echo=TRUE, results='markup', warning=TRUE, message=TRUE}
+```{r, echo=FALSE, results='hide', warning=FALSE, message=FALSE}
 library(ggplot2)
 library(scales)
 library(Hmisc)

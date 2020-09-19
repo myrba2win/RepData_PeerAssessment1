@@ -37,34 +37,6 @@ summary(activityData)
 ##### 2. Load the libraries 
 
 
-```r
-library(ggplot2)
-library(scales)
-library(Hmisc)
-```
-
-```
-## Loading required package: lattice
-```
-
-```
-## Loading required package: survival
-```
-
-```
-## Loading required package: Formula
-```
-
-```
-## 
-## Attaching package: 'Hmisc'
-```
-
-```
-## The following objects are masked from 'package:base':
-## 
-##     format.pval, units
-```
 ##### 3. Transforming Interval Data
 
 
