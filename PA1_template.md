@@ -10,8 +10,8 @@ output:
 ####   1. Read the base zip file "activity.zip" that contains the data
 #####     This first line will likely take a few seconds. Be patient!
 
-```{r, echo = TRUE, results = 'markup', warning = TRUE, message = TRUE}
 
+```r
 dataInput_file <- "activity.zip"
 if (!file.exists(dataInput_file)) {
   data_URL <- "https://d396qusza40orc.cloudfront.net/repdata%2Fdata%2Factivity.zip"
@@ -22,19 +22,53 @@ if (!file.exists(dataInput_file)) {
 activityData <- read.csv('activity.csv')
 
 summary(activityData)
+```
 
-
+```
+##      steps            date              interval     
+##  Min.   :  0.00   Length:17568       Min.   :   0.0  
+##  1st Qu.:  0.00   Class :character   1st Qu.: 588.8  
+##  Median :  0.00   Mode  :character   Median :1177.5  
+##  Mean   : 37.38                      Mean   :1177.5  
+##  3rd Qu.: 12.00                      3rd Qu.:1766.2  
+##  Max.   :806.00                      Max.   :2355.0  
+##  NA's   :2304
 ```
 ##### 2. Load the libraries 
 
-```{r, echo=TRUE, results='markup', warning=TRUE, message=TRUE}
+
+```r
 library(ggplot2)
 library(scales)
 library(Hmisc)
 ```
+
+```
+## Loading required package: lattice
+```
+
+```
+## Loading required package: survival
+```
+
+```
+## Loading required package: Formula
+```
+
+```
+## 
+## Attaching package: 'Hmisc'
+```
+
+```
+## The following objects are masked from 'package:base':
+## 
+##     format.pval, units
+```
 ##### 3. Transforming Interval Data
 
-```{r}
+
+```r
 #activityData$interval <- strptime(gsub("([0-9]{1,2})([0-9]{2})", "\\1:\\2", activityData$interval), format='%H:%M')
 ```
 
@@ -43,53 +77,63 @@ library(Hmisc)
 ## What is mean total number of steps taken per day?
 
 
-```{r}
+
+```r
 stepsByDay <- tapply(activityData$steps, activityData$date, sum, na.rm=TRUE)
 ```
 
 
 ##### 1. Histogram of the total number of steps taken each day
 
-```{r}
+
+```r
 qplot(stepsByDay, xlab='Total steps per day', ylab='Frequency using binwith 500', binwidth=500)
 ```
+
+![](PA1_template_files/figure-html/unnamed-chunk-5-1.png)<!-- -->
 
 
 
 ##### 2. Mean and median total number of steps taken per day
 
-```{r}
+
+```r
 stepsByDayMean <- mean(stepsByDay)
 stepsByDayMedian <- median(stepsByDay)
 ```
-* Mean: `r stepsByDayMean` 
-* Median: `r stepsByDayMedian`
+* Mean: 9354.2295082 
+* Median: 10395
 
 -----
 
 ## What is the average daily activity pattern?
 
 
-```{r}
+
+```r
 averageStepsPerTimeBlock <- aggregate(x=list(meanSteps=activityData$steps), by=list(interval=activityData$interval), FUN=mean, na.rm=TRUE)
 ```
 
 ##### 1. Time series plot
 
-```{r}
+
+```r
 ggplot(data=averageStepsPerTimeBlock, aes(x=interval, y=meanSteps)) +
     geom_line() +
     xlab("5-minute interval") +
     ylab("average number of steps taken") 
 ```
+
+![](PA1_template_files/figure-html/unnamed-chunk-8-1.png)<!-- -->
 ##### 2. The 5-minute interval on average across all the days in the dataset that contains the maximum number of steps?
 
-```{r}
+
+```r
 mostSteps <- which.max(averageStepsPerTimeBlock$meanSteps)
 timeMostSteps <-  gsub("([0-9]{1,2})([0-9]{2})", "\\1:\\2", averageStepsPerTimeBlock[mostSteps,'interval'])
 ```
 
-* Most Steps at: `r timeMostSteps`
+* Most Steps at: 8:35
 
 ----
 
