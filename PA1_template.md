@@ -40,9 +40,6 @@ summary(activityData)
 ##### 3. Transforming Interval Data
 
 
-```r
-#activityData$interval <- strptime(gsub("([0-9]{1,2})([0-9]{2})", "\\1:\\2", activityData$interval), format='%H:%M')
-```
 
 -----
 
@@ -119,7 +116,10 @@ timeMostSteps <-  gsub("([0-9]{1,2})([0-9]{2})", "\\1:\\2", averageStepsPerTimeB
 numMissingValues <- length(which(is.na(activityData$steps)))
 ```
 
-* Number of missing values: 2304
+
+```
+## [1] 2304
+```
 
 ##### 2. Devise a strategy for filling in all of the missing values in the dataset.
 ##### 3. Create a new dataset that is equal to the original dataset but with the missing data filled in.
@@ -139,7 +139,7 @@ stepsByDayImputed <- tapply(activityDataImputed$steps, activityDataImputed$date,
 qplot(stepsByDayImputed, xlab='Total steps per day (Imputed)', ylab='Frequency using binwith 500', binwidth=500)
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-12-1.png)<!-- -->
+![](PA1_template_files/figure-html/unnamed-chunk-13-1.png)<!-- -->
 
 
  
@@ -160,26 +160,26 @@ stepsByDayMedianImputed <- median(stepsByDayImputed)
 
 
 ## Are there differences in activity patterns between weekdays and weekends?
-
-##### 1. Create a new factor variable in the dataset with two levels ??? ???weekday??? and ???weekend??? indicating whether a given date is a weekday or weekend day.
+##### 1. Creating new factor for two series (weekdays, weekend)
 
 
 
 ```r
-activityDataImputed$dateType <-  ifelse(as.POSIXlt(activityDataImputed$date)$wday %in% c(0,6), 'weekend', 'weekday')
+activityDataImputed$dateType <-  ifelse(as.POSIXlt(activityDataImputed$date)$wday %in% c(0,6), 'weekend', 'weekdays')
 ```
 
-##### 2. Panel plot containing a time series plot
+##### 2. Ploting comparative series
 
 
 
 ```r
 averagedActivityDataImputed <- aggregate(steps ~ interval + dateType, data=activityDataImputed, mean)
-ggplot(averagedActivityDataImputed, aes(interval, steps)) + 
+ggplot(averagedActivityDataImputed, aes(interval, steps, color=dateType)) + 
     geom_line() + 
     facet_grid(dateType ~ .) +
-    xlab("5-minute interval") + 
-    ylab("avarage number of steps")
+    xlab("Interval") + 
+    ylab("Mean of steps") +
+    ggtitle("Comparison of Average Number of Steps in Each Interval")
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-15-1.png)<!-- -->
+![](PA1_template_files/figure-html/unnamed-chunk-16-1.png)<!-- -->
