@@ -47,6 +47,7 @@ summary(activityData)
 
 ## What is mean total number of steps taken per day?
 
+#### 1.  The total number of steps taken per day
 
 
 ```r
@@ -54,7 +55,7 @@ stepsByDay <- tapply(activityData$steps, activityData$date, sum, na.rm=TRUE)
 ```
 
 
-##### 1. Histogram of the total number of steps taken each day
+##### 2. Histogram of the total number of steps taken each day
 
 
 ```r
@@ -65,7 +66,7 @@ qplot(stepsByDay, xlab='Total steps per day', ylab='Frequency using binwith 500'
 
 
 
-##### 2. Mean and median total number of steps taken per day
+##### 3. Mean and median total number of steps taken per day
 
 
 ```r
