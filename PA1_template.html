@@ -606,6 +606,7 @@ activityData$timeInterval &lt;- as.factor(sprintf(&quot;%02d:%02d&quot;, activit
 <div id="the-total-number-of-steps-taken-per-day" class="section level4">
 <h4>1. The total number of steps taken per day</h4>
 <pre class="r"><code>stepsByDay &lt;- aggregate(steps~date, activityData, sum, na.exclude=TRUE)</code></pre>
+<pre class="r"><code>stepsByDay</code></pre>
 <pre><code>##          date steps
 ## 1  2012-10-02   127
 ## 2  2012-10-03 11353

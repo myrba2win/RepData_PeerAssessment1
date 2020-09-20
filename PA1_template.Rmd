@@ -57,7 +57,7 @@ activityData$timeInterval <- as.factor(sprintf("%02d:%02d", activityData$hour, a
 stepsByDay <- aggregate(steps~date, activityData, sum, na.exclude=TRUE)
 ```
 
-```{r, echo=FALSE, results='markup', warning=FALSE, message=FALSE}
+```{r, echo=TRUE, results='markup', warning=FALSE, message=FALSE}
 stepsByDay
 ```
 

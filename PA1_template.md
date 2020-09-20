@@ -77,6 +77,10 @@ stepsByDay <- aggregate(steps~date, activityData, sum, na.exclude=TRUE)
 ```
 
 
+```r
+stepsByDay
+```
+
 ```
 ##          date steps
 ## 1  2012-10-02   127
